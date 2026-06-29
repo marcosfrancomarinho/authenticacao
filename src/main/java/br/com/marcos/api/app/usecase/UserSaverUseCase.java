@@ -36,8 +36,8 @@ public class UserSaverUseCase {
 
         User user = new User(name, email, password);
 
-        String encryptedPassword = this.passwordHasher.hash(payload.password());
-        user.changePasswordHash(encryptedPassword);
+        Password encryptedPassword = this.passwordHasher.hash(password);
+        user.changePasswordHash(encryptedPassword.getValue());
 
         User userRegistered = this.userSaver.save(user);
 
