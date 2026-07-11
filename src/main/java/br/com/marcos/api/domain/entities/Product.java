@@ -1,7 +1,6 @@
 package br.com.marcos.api.domain.entities;
 
 import java.math.BigDecimal;
-import java.text.Normalizer;
 
 public class Product {
     private Long id;
@@ -11,13 +10,9 @@ public class Product {
 
     public Product(String name, BigDecimal price, String description) {
         validate(name, price, description);
-        String nameNormalized = Normalizer.normalize(name, Normalizer.Form.NFD)
-                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
-                .trim()
-                .toLowerCase();
         this.price = price;
-        this.name = nameNormalized;
-        this.description = (description != null) ? description.trim().toLowerCase() : null;
+        this.name = name;
+        this.description = description;
     }
 
     public Product(Long id, String name, BigDecimal price, String description) {
