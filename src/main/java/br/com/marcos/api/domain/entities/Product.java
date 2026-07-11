@@ -21,20 +21,23 @@ public class Product {
     }
 
     private void validate(String name, BigDecimal price, String description) {
-        if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("O nome do produto é obrigatório.");
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("O nome é obrigatório.");
         }
+
         if (name.length() > 100) {
             throw new IllegalArgumentException("O nome deve ter no máximo 100 caracteres.");
         }
+
         if (price == null) {
-            throw new IllegalArgumentException("O preço do produto é obrigatório.");
-        }
-        if (price.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("O preço deve ser igual ou maior que zero.");
+            throw new IllegalArgumentException("O preço é obrigatório.");
         }
 
-        if (description != null && description.trim().length() > 255) {
+        if (price.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("O preço deve ser maior ou igual a zero.");
+        }
+
+        if (description != null && description.length() > 255) {
             throw new IllegalArgumentException("A descrição deve ter no máximo 255 caracteres.");
         }
     }
