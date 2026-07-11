@@ -20,7 +20,7 @@ public class ProductSaverUseCase {
 
     public ProductSaverOutput save(ProductSaverInput payload) {
         Product product = new Product(payload.name(), payload.price(), payload.description());
-        Optional<Product> productFound = this.productFinder.byName(payload.name());
+        Optional<Product> productFound = this.productFinder.byName(product.getName());
         if (!productFound.isEmpty()) {
             throw new ProductAlreadyExistsException();
         }

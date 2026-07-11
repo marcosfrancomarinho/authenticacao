@@ -23,7 +23,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgzNzgwMzUxL
 Content-Type: application/json
 
 {
-    "name":"geladeira",
-    "price":"10.20",
-    "description":"Consul"
+    "name":"fogao",
+    "price":7888.555555555555555555555555555,
+    "description":"Britania"
 }
