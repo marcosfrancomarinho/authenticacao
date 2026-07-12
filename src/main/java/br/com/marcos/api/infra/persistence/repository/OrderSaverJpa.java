@@ -24,7 +24,7 @@ public class OrderSaverJpa implements OrderSaver {
     @Transactional
     public Id save(Order order) {
 
-        OrderEntity orderEntity = new OrderEntity(order.calculateTotalPrice());
+        OrderEntity orderEntity = new OrderEntity(order.getTotalPrice());
         for (OrderProduct orderProduct : order.getOrderProducts()) {
 
             ProductEntity productEntity = this.productRepository.findById(orderProduct.getProductId()).orElseThrow();

@@ -37,12 +37,15 @@ public class Order {
         return new ArrayList<OrderProduct>(this.orderProducts);
     }
 
-    public BigDecimal calculateTotalPrice() {
+    public BigDecimal getTotalPrice() {
         BigDecimal total = BigDecimal.ZERO;
         for (OrderProduct orderProduct : orderProducts) {
-            total = total.add(orderProduct.getPriceTotal());
+            total = total.add(orderProduct.getTotalPrice());
         }
         return total;
     }
 
+    public int getTotalQuantityProducts() {
+        return orderProducts.stream().mapToInt(OrderProduct::getQuantity).sum();
+    }
 }

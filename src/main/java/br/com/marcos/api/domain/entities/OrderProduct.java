@@ -54,7 +54,7 @@ public class OrderProduct {
         return unitPrice.getValue();
     }
 
-    public BigDecimal getPriceTotal() {
+    public BigDecimal getTotalPrice() {
         BigDecimal quantityBigDecimal = BigDecimal.valueOf(this.quantity.getValue());
         BigDecimal price = this.unitPrice.getValue();
         BigDecimal total = price.multiply(quantityBigDecimal);

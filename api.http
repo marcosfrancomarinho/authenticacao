@@ -19,34 +19,50 @@ Content-Type: application/json
 
 ###
 POST http://localhost:8080/product
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgzODcxNTQwLCJleHAiOjE3ODM4NzUxNDB9.jG_xtTf_U3J_BEGZgXhoqDgXhbu-SECqasWj0RhxdJA
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgzODgyMDI4LCJleHAiOjE3ODM4ODU2Mjh9.v4zMPRMUJLiZtU2eMd89yGKkF2dTi81S9DuE3HTg-2U
+
 
 {
-    "name":"mesa",
-    "price":800,
-    "description":"Britania"
+    "name":"Ventilador",
+    "price":500,
+    "description":"Lenovo"
 }
 
 ###
 POST http://localhost:8080/orders
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgzODcxNTQwLCJleHAiOjE3ODM4NzUxNDB9.jG_xtTf_U3J_BEGZgXhoqDgXhbu-SECqasWj0RhxdJA
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgzODgyMDI4LCJleHAiOjE3ODM4ODU2Mjh9.v4zMPRMUJLiZtU2eMd89yGKkF2dTi81S9DuE3HTg-2U
 Content-Type: application/json
 
 [
   {
     "productId": 1,
-    "quantity": 2,
-    "unitPrice": 10
+    "quantity": 7,
+    "unitPrice": 1000
   },
   {
-    "productId": 1,
+    "productId": 2,
+    "quantity": 7,
+    "unitPrice": 1000
+  },
+  {
+    "productId": 3,
+    "quantity": 7,
+    "unitPrice": 1000
+  },
+  {
+    "productId": 4,
     "quantity": 2,
-    "unitPrice": 10
+    "unitPrice": 500
   }
+
 ]
 
 ###
-GET http://localhost:8080/product?page=1&size=2
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgzODc2OTg2LCJleHAiOjE3ODM4ODA1ODZ9.gOXhqKXS9Sw0cBLsSUywKy1vn3e74GkiTWKcC_yReLg
+GET http://localhost:8080/product?page=0&size=10
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgzODgyMDI4LCJleHAiOjE3ODM4ODU2Mjh9.v4zMPRMUJLiZtU2eMd89yGKkF2dTi81S9DuE3HTg-2U
+
+###
+GET http://localhost:8080/order/2
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgzODgyMDI4LCJleHAiOjE3ODM4ODU2Mjh9.v4zMPRMUJLiZtU2eMd89yGKkF2dTi81S9DuE3HTg-2U
 

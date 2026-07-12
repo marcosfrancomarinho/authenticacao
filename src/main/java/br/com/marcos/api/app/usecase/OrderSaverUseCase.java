@@ -32,7 +32,7 @@ public class OrderSaverUseCase {
             Optional<Product> productFound = this.productFinder.byId(id);
 
             if (productFound.isEmpty()) {
-                throw new ProductNotFoundException();
+                throw new ProductNotFoundException(id.getValue());
             }
             Product product = productFound.get();
             Quantity quantity = new Quantity(orderProductSaverInput.quantity());
