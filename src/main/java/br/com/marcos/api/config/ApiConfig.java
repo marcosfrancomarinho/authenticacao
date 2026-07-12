@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import br.com.marcos.api.app.usecase.OrderSaverUseCase;
+import br.com.marcos.api.app.usecase.ProductFinderUseCase;
 import br.com.marcos.api.app.usecase.ProductSaverUseCase;
 import br.com.marcos.api.app.usecase.UserLoginUseCase;
 import br.com.marcos.api.app.usecase.UserSaverUseCase;
@@ -92,6 +93,11 @@ public class ApiConfig {
     @Bean
     OrderSaverUseCase orderSaverUseCase(ProductFinder productFinder, OrderSaver orderSaver) {
         return new OrderSaverUseCase(productFinder, orderSaver);
+    }
+
+    @Bean
+    ProductFinderUseCase productFinderUseCase(ProductFinder productFinder) {
+        return new ProductFinderUseCase(productFinder);
     }
 
 }

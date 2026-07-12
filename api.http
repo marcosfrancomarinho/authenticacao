@@ -45,3 +45,8 @@ Content-Type: application/json
     "unitPrice": 10
   }
 ]
+
+###
+GET http://localhost:8080/product?page=1&size=2
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgzODc2OTg2LCJleHAiOjE3ODM4ODA1ODZ9.gOXhqKXS9Sw0cBLsSUywKy1vn3e74GkiTWKcC_yReLg
+
