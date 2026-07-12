@@ -1,10 +1,10 @@
 # API de Pedidos
 
-API REST desenvolvida com **Java**, **Spring Boot**, **Spring Security**, **JWT**, **JPA/Hibernate** e **SQLite**, utilizando princípios de **Clean Architecture**.
+API REST desenvolvida com **Java**, **Spring Boot**, **Spring Security**, **JWT**, **JPA/Hibernate** e **SQLite**, seguindo os princípios da **Clean Architecture**.
 
 ## Tecnologias
 
-- Java
+- Java 24
 - Spring Boot
 - Spring Security
 - Spring Data JPA
@@ -18,19 +18,67 @@ API REST desenvolvida com **Java**, **Spring Boot**, **Spring Security**, **JWT*
 ## Funcionalidades
 
 - Cadastro de usuários
-- Autenticação com JWT
+- Login com autenticação JWT
 - Cadastro de produtos
 - Listagem paginada de produtos
 - Criação de pedidos
-- Consulta de pedido por ID
+- Consulta de pedidos por ID
+
+---
+
+## Arquitetura
+
+O projeto foi desenvolvido seguindo os princípios da **Clean Architecture**, separando responsabilidades entre as camadas da aplicação.
+
+```
+src
+├── app
+│   ├── dtos
+│   └── usecase
+│
+├── domain
+│   ├── entities
+│   ├── repository
+│   ├── gateway
+│   ├── exceptions
+│   └── valuesobject
+│
+├── infra
+│   ├── auth
+│   ├── http
+│   ├── persistence
+│   └── security
+│
+├── config
+└── ApiApplication
+```
+
+### Fluxo da requisição
+
+```
+Cliente
+    │
+    ▼
+Controller
+    │
+    ▼
+Use Case
+    │
+    ▼
+Repository (Domain)
+    │
+    ▼
+Repository JPA
+    │
+    ▼
+SQLite
+```
 
 ---
 
 ## Autenticação
 
-Após realizar o login, utilize o token JWT retornado em todas as rotas protegidas.
-
-Exemplo:
+Após realizar o login, envie o token JWT em todas as rotas protegidas.
 
 ```http
 Authorization: Bearer SEU_TOKEN
@@ -40,15 +88,13 @@ Authorization: Bearer SEU_TOKEN
 
 # Endpoints
 
-## Cadastro de usuário
-
-### POST `/register`
+## POST `/register`
 
 ### Body
 
 ```json
 {
-    "name": "joao",
+    "name": "João",
     "email": "joao@gmail.com",
     "password": "12345678"
 }
@@ -56,9 +102,7 @@ Authorization: Bearer SEU_TOKEN
 
 ---
 
-## Login
-
-### POST `/login`
+## POST `/login`
 
 ### Body
 
@@ -79,9 +123,7 @@ Authorization: Bearer SEU_TOKEN
 
 ---
 
-## Cadastrar produto
-
-### POST `/product`
+## POST `/product`
 
 ### Headers
 
@@ -93,17 +135,15 @@ Authorization: Bearer TOKEN
 
 ```json
 {
-    "name": "Celular",
-    "price": 500,
+    "name": "Notebook",
+    "price": 4500,
     "description": "Lenovo"
 }
 ```
 
 ---
 
-## Listar produtos
-
-### GET `/product?page=0&size=10`
+## GET `/product?page=0&size=10`
 
 ### Headers
 
@@ -114,15 +154,13 @@ Authorization: Bearer TOKEN
 ### Query Parameters
 
 | Parâmetro | Descrição |
-| ---------- | --------- |
+|-----------|-----------|
 | page | Número da página |
-| size | Quantidade de registros por página |
+| size | Quantidade de registros |
 
 ---
 
-## Criar pedido
-
-### POST `/orders`
+## POST `/orders`
 
 ### Headers
 
@@ -136,34 +174,22 @@ Authorization: Bearer TOKEN
 [
     {
         "productId": 1,
-        "quantity": 7,
-        "unitPrice": 500
+        "quantity": 2,
+        "unitPrice": 4500
     },
     {
         "productId": 2,
-        "quantity": 7,
-        "unitPrice": 500
-    },
-    {
-        "productId": 3,
-        "quantity": 7,
-        "unitPrice": 500
-    },
-    {
-        "productId": 4,
-        "quantity": 2,
-        "unitPrice": 500
+        "quantity": 1,
+        "unitPrice": 1200
     }
 ]
 ```
 
 ---
 
-## Buscar pedido por ID
+## GET `/orders/{id}`
 
-### GET `/orders/{id}`
-
-Exemplo
+### Exemplo
 
 ```http
 GET /orders/1
@@ -175,7 +201,7 @@ GET /orders/1
 Authorization: Bearer TOKEN
 ```
 
-### Exemplo de resposta
+### Resposta
 
 ```json
 {
@@ -184,64 +210,33 @@ Authorization: Bearer TOKEN
         {
             "productId": 1,
             "name": "Notebook",
-            "price": 1000,
+            "price": 4500,
             "description": "Lenovo",
-            "quantity": 7
-        },
-        {
-            "productId": 2,
-            "name": "Geladeira",
-            "price": 1000,
-            "description": "Lenovo",
-            "quantity": 7
+            "quantity": 2
         }
     ],
-    "totalPrice": 14000,
-    "totalQuantity": 14
+    "totalPrice": 9000,
+    "totalQuantity": 2
 }
-```
-
----
-
-# Estrutura do Projeto
-
-```
-src
-├── app
-│   ├── dtos
-│   └── usecase
-│
-├── domain
-│   ├── entities
-│   ├── repository
-│   ├── exceptions
-│   └── valuesobject
-│
-├── infra
-│   ├── http
-│   ├── persistence
-│   └── security
-│
-└── ApiApplication
 ```
 
 ---
 
 # Executando o projeto
 
-Clone o repositório:
+Clone o repositório.
 
 ```bash
 git clone <url-do-repositorio>
 ```
 
-Entre na pasta:
+Entre na pasta do projeto.
 
 ```bash
 cd api
 ```
 
-Execute:
+Execute a aplicação.
 
 ```bash
 ./mvnw spring-boot:run
@@ -253,7 +248,7 @@ ou
 mvn spring-boot:run
 ```
 
-A aplicação estará disponível em:
+A API estará disponível em:
 
 ```
 http://localhost:8080
@@ -261,35 +256,43 @@ http://localhost:8080
 
 ---
 
-# Fluxo da API
+# Estrutura do projeto
 
 ```
-Usuário
-    │
-    ▼
-Controller
-    │
-    ▼
-Use Case
-    │
-    ▼
-Repository (Domain)
-    │
-    ▼
-Repository JPA
-    │
-    ▼
-SQLite
+src
+├── app
+│   ├── dtos
+│   └── usecase
+│
+├── config
+│
+├── domain
+│   ├── entities
+│   ├── exceptions
+│   ├── gateway
+│   ├── repository
+│   └── valuesobject
+│
+├── infra
+│   ├── auth
+│   ├── http
+│   ├── persistence
+│   └── security
+│
+└── ApiApplication
 ```
 
 ---
 
-# Arquitetura
+# Objetivos do projeto
 
-O projeto segue os princípios da **Clean Architecture**, separando responsabilidades em:
+Este projeto foi desenvolvido para praticar conceitos como:
 
-- **Domain**: regras de negócio e entidades.
-- **Application**: casos de uso e DTOs.
-- **Infrastructure**: persistência, HTTP, autenticação e integrações.
-
-Essa separação permite baixo acoplamento, maior facilidade de testes e evolução da aplicação.
+- Clean Architecture
+- Spring Security
+- JWT
+- JPA/Hibernate
+- Value Objects
+- Repository Pattern
+- Casos de Uso (Use Cases)
+- Separação entre domínio e infraestrutura
