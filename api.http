@@ -24,7 +24,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgzODgyMDI4L
 
 
 {
-    "name":"Ventilador",
+    "name":"Celular",
     "price":500,
     "description":"Lenovo"
 }
@@ -38,17 +38,17 @@ Content-Type: application/json
   {
     "productId": 1,
     "quantity": 7,
-    "unitPrice": 1000
+    "unitPrice": 500
   },
   {
     "productId": 2,
     "quantity": 7,
-    "unitPrice": 1000
+    "unitPrice": 500
   },
   {
     "productId": 3,
     "quantity": 7,
-    "unitPrice": 1000
+    "unitPrice": 500
   },
   {
     "productId": 4,
@@ -63,6 +63,6 @@ GET http://localhost:8080/product?page=0&size=10
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgzODgyMDI4LCJleHAiOjE3ODM4ODU2Mjh9.v4zMPRMUJLiZtU2eMd89yGKkF2dTi81S9DuE3HTg-2U
 
 ###
-GET http://localhost:8080/order/2
+GET http://localhost:8080/orders/1
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgzODgyMDI4LCJleHAiOjE3ODM4ODU2Mjh9.v4zMPRMUJLiZtU2eMd89yGKkF2dTi81S9DuE3HTg-2U
 

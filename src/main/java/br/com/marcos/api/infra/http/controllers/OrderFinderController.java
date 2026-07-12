@@ -19,7 +19,7 @@ public class OrderFinderController {
         this.orderFinderUseCase = orderFinderUseCase;
     }
 
-    @GetMapping("/order/{id}")
+    @GetMapping("/orders/{id}")
     public ResponseEntity<?> execute(@PathVariable Long id) {
         try {
             OrderFinderInput payload = new OrderFinderInput(id);
