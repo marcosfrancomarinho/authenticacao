@@ -4,6 +4,11 @@ import java.util.Optional;
 
 import br.com.marcos.api.domain.entities.Product;
 import br.com.marcos.api.domain.repository.ProductFinder;
+import br.com.marcos.api.domain.valuesobject.Description;
+import br.com.marcos.api.domain.valuesobject.NameProduct;
+import br.com.marcos.api.domain.valuesobject.Id;
+import br.com.marcos.api.domain.valuesobject.Price;
+import br.com.marcos.api.infra.persistence.entities.ProductEntity;
 
 public class ProductFinderJpa implements ProductFinder {
     private ProductRepository productRepository;
@@ -13,13 +18,28 @@ public class ProductFinderJpa implements ProductFinder {
     }
 
     @Override
-    public Optional<Product> byName(String name) {
-        return this.productRepository.findByName(name).map(
+    public Optional<Product> byName(NameProduct name) {
+        String nameProducString = name.getValue();
+        Optional<ProductEntity> productEntity = this.productRepository.findByName(nameProducString);
+
+        return productEntity.map(
                 entity -> new Product(
-                        entity.getId(),
-                        entity.getName(),
-                        entity.getPrice(),
-                        entity.getDescription()));
+                        new Id(entity.getId()),
+                        new NameProduct(entity.getName()),
+                        new Price(entity.getPrice()),
+                        new Description(entity.getDescription())));
+    }
+
+    @Override
+    public Optional<Product> byId(Id productId) {
+        Optional<ProductEntity> productEntity = this.productRepository.findById(productId.getValue());
+
+        return productEntity.map(
+                entity -> new Product(
+                        new Id(entity.getId()),
+                        new NameProduct(entity.getName()),
+                        new Price(entity.getPrice()),
+                        new Description(entity.getDescription())));
     }
 
 }

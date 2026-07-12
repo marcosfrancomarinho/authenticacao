@@ -5,6 +5,7 @@ import java.util.Optional;
 import br.com.marcos.api.domain.entities.User;
 import br.com.marcos.api.domain.repository.UserFinder;
 import br.com.marcos.api.domain.valuesobject.Email;
+import br.com.marcos.api.domain.valuesobject.Id;
 import br.com.marcos.api.domain.valuesobject.Name;
 import br.com.marcos.api.domain.valuesobject.Password;
 
@@ -19,7 +20,7 @@ public class UserFinderJpa implements UserFinder {
     public Optional<User> byEmail(Email email) {
         return this.userRepository.findByEmail(email.getValue())
                 .map(entity -> new User(
-                        entity.getId(),
+                        new Id(entity.getId()),
                         new Name(entity.getName()),
                         new Email(entity.getEmail()),
                         Password.fromHash(entity.getPassword())));

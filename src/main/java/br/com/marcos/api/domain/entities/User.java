@@ -1,12 +1,13 @@
 package br.com.marcos.api.domain.entities;
 
 import br.com.marcos.api.domain.valuesobject.Email;
+import br.com.marcos.api.domain.valuesobject.Id;
 import br.com.marcos.api.domain.valuesobject.Name;
 import br.com.marcos.api.domain.valuesobject.Password;
 
 public class User {
 
-    private Long id;
+    private Id id;
     private Name name;
     private Email email;
     private Password password;
@@ -17,7 +18,7 @@ public class User {
         this.password = password;
     }
 
-    public User(Long id, Name name, Email email, Password password) {
+    public User(Id id, Name name, Email email, Password password) {
         this(name, email, password);
         this.id = id;
     }
@@ -26,7 +27,7 @@ public class User {
         if (id == null) {
             throw new IllegalStateException("Usuário ainda não possui id.");
         }
-        return id;
+        return id.getValue();
     }
 
     public String getName() {

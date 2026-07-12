@@ -2,59 +2,44 @@ package br.com.marcos.api.domain.entities;
 
 import java.math.BigDecimal;
 
-public class Product {
-    private Long id;
-    private String name;
-    private BigDecimal price;
-    private String description;
+import br.com.marcos.api.domain.valuesobject.Description;
+import br.com.marcos.api.domain.valuesobject.Id;
+import br.com.marcos.api.domain.valuesobject.NameProduct;
+import br.com.marcos.api.domain.valuesobject.Price;
 
-    public Product(String name, BigDecimal price, String description) {
-        validate(name, price, description);
+public class Product {
+    private Id id;
+    private NameProduct name;
+    private Price price;
+    private Description description;
+
+    public Product(NameProduct name, Price price, Description description) {
         this.price = price;
         this.name = name;
         this.description = description;
     }
 
-    public Product(Long id, String name, BigDecimal price, String description) {
+    public Product(Id id, NameProduct name, Price price, Description description) {
         this(name, price, description);
         this.id = id;
     }
 
-    private void validate(String name, BigDecimal price, String description) {
-        if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("O nome é obrigatório.");
-        }
-
-        if (name.length() > 100) {
-            throw new IllegalArgumentException("O nome deve ter no máximo 100 caracteres.");
-        }
-
-        if (price == null) {
-            throw new IllegalArgumentException("O preço é obrigatório.");
-        }
-
-        if (price.compareTo(BigDecimal.ZERO) < 0) {
-            throw new IllegalArgumentException("O preço deve ser maior ou igual a zero.");
-        }
-
-        if (description != null && description.length() > 255) {
-            throw new IllegalArgumentException("A descrição deve ter no máximo 255 caracteres.");
-        }
-    }
-
     public Long getId() {
-        return id;
+        if (id == null) {
+            throw new IllegalStateException("Produto ainda não possui id.");
+        }
+        return id.getValue();
     }
 
     public String getName() {
-        return name;
+        return name.getValue();
     }
 
     public BigDecimal getPrice() {
-        return price;
+        return price.getValue();
     }
 
     public String getDescription() {
-        return description;
+        return description.getValue();
     }
 }

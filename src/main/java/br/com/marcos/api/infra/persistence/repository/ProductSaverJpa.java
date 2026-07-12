@@ -2,6 +2,10 @@ package br.com.marcos.api.infra.persistence.repository;
 
 import br.com.marcos.api.domain.entities.Product;
 import br.com.marcos.api.domain.repository.ProductSaver;
+import br.com.marcos.api.domain.valuesobject.Description;
+import br.com.marcos.api.domain.valuesobject.Id;
+import br.com.marcos.api.domain.valuesobject.NameProduct;
+import br.com.marcos.api.domain.valuesobject.Price;
 import br.com.marcos.api.infra.persistence.entities.ProductEntity;
 
 public class ProductSaverJpa implements ProductSaver {
@@ -22,10 +26,10 @@ public class ProductSaverJpa implements ProductSaver {
         ProductEntity productRegistered = this.productRepository.save(productEntity);
 
         return new Product(
-                productRegistered.getId(),
-                productRegistered.getName(),
-                productRegistered.getPrice(),
-                productRegistered.getDescription());
+                new Id(productRegistered.getId()),
+                new NameProduct(productRegistered.getName()),
+                new Price(productRegistered.getPrice()),
+                new Description(productRegistered.getDescription()));
     }
 
 }

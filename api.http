@@ -19,11 +19,29 @@ Content-Type: application/json
 
 ###
 POST http://localhost:8080/product
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgzNzgwMzUxLCJleHAiOjE3ODM3ODM5NTF9.SVF34jKlSUziIMitiSZNzZ6sIRhj-95G3yWrze-xX0c
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgzODcxNTQwLCJleHAiOjE3ODM4NzUxNDB9.jG_xtTf_U3J_BEGZgXhoqDgXhbu-SECqasWj0RhxdJA
 Content-Type: application/json
 
 {
-    "name":-5,
-    "price":7888.555555555555555555555555555,
+    "name":"mesa",
+    "price":800,
     "description":"Britania"
 }
+
+###
+POST http://localhost:8080/orders
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNzgzODcxNTQwLCJleHAiOjE3ODM4NzUxNDB9.jG_xtTf_U3J_BEGZgXhoqDgXhbu-SECqasWj0RhxdJA
+Content-Type: application/json
+
+[
+  {
+    "productId": 1,
+    "quantity": 2,
+    "unitPrice": 10
+  },
+  {
+    "productId": 1,
+    "quantity": 2,
+    "unitPrice": 10
+  }
+]

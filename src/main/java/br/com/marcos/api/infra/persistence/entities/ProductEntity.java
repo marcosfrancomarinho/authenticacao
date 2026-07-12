@@ -1,24 +1,33 @@
 package br.com.marcos.api.infra.persistence.entities;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "products")
 public class ProductEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true)
+
+    @Column(nullable = false, unique = true)
     private String name;
+
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
+
+    @Column(nullable = false)
     private String description;
+
+    @OneToMany(mappedBy = "product")
+    private List<OrderProductEntity> orderProducts = new ArrayList<>();
+
+    public ProductEntity() {
+    }
 
     public ProductEntity(String name, BigDecimal price, String description) {
         this.name = name;
@@ -26,15 +35,8 @@ public class ProductEntity {
         this.description = description;
     }
 
-    public ProductEntity() {
-    }
-
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -61,4 +63,11 @@ public class ProductEntity {
         this.description = description;
     }
 
+    public List<OrderProductEntity> getOrderProducts() {
+        return orderProducts;
+    }
+
+    public void setOrderProducts(List<OrderProductEntity> orderProducts) {
+        this.orderProducts = orderProducts;
+    }
 }
